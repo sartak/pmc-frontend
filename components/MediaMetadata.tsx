@@ -3,10 +3,35 @@ import { Chip, Divider, Stack } from "@mui/material";
 import { Duration } from "./Duration";
 import { LanguageList } from "./LanguageList";
 import { Media } from "../lib/media";
+import { Skip } from "./Skip";
 import { TagList } from "./TagList";
 
 type Props = {
   media: Media;
+};
+
+export const calculateTrueDuration = (media: Media): number | null => {
+  const { durationSeconds } = media;
+  if (durationSeconds === null) {
+    return durationSeconds;
+  }
+
+  let seconds = durationSeconds;
+
+  [
+    [media.skip1Start, media.skip1End],
+    [media.skip2Start, media.skip2End],
+  ].forEach(([start, end]) => {
+    if (start !== null && end !== null) {
+      seconds -= end - start;
+    } else if (end !== null) {
+      seconds -= end;
+    } else if (start !== null) {
+      seconds -= durationSeconds - start;
+    }
+  });
+
+  return seconds;
 };
 
 export const MediaMetadata = ({ media }: Props) => {
@@ -19,6 +44,7 @@ export const MediaMetadata = ({ media }: Props) => {
   const subtitle_langs = Array.from(
     new Set(media.subtitle_langs?.split(",").filter((tag) => /\S/.test(tag)))
   );
+  const true_duration = calculateTrueDuration(media);
 
   return (
     <ul>
@@ -62,11 +88,28 @@ export const MediaMetadata = ({ media }: Props) => {
       )}
       <li>
         duration:{" "}
-        {media.durationSeconds === null ? (
-          "unknown"
-        ) : (
-          <Duration seconds={media.durationSeconds} />
-        )}
+        <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
+          {media.durationSeconds === null ? (
+            <span>unknown</span>
+          ) : (
+            <Duration seconds={media.durationSeconds} />
+          )}
+          {(media.skip1Start !== null || media.skip1End !== null) && (
+            <Skip start={media.skip1Start} end={media.skip1End} />
+          )}
+          {(media.skip2Start !== null || media.skip2End !== null) && (
+            <Skip start={media.skip2Start} end={media.skip2End} />
+          )}
+          {true_duration !== null &&
+            (media.skip1Start !== null ||
+              media.skip1End !== null ||
+              media.skip2Start !== null ||
+              media.skip2End !== null) && (
+              <span>
+                → <Duration seconds={true_duration} />
+              </span>
+            )}
+        </Stack>
       </li>
     </ul>
   );

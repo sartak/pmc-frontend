@@ -4,7 +4,7 @@ type Props = {
   seconds: number;
 };
 
-const formatDuration = (seconds: number): string => {
+export const formatDuration = (seconds: number): string => {
   let s: string | number = seconds;
   let m: string | number = Math.floor(seconds / 60);
   s -= m * 60;
@@ -26,5 +26,5 @@ const formatDuration = (seconds: number): string => {
 };
 
 export const Duration = ({ seconds }: Props) => {
-  return <React.Fragment>{formatDuration(seconds)}</React.Fragment>;
+  return <span>{formatDuration(seconds)}</span>;
 };
