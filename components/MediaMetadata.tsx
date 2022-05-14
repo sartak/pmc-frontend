@@ -40,10 +40,20 @@ export const MediaMetadata = ({ media }: Props) => {
     new Set(media.tags.split("`").filter((tag) => /\S/.test(tag)))
   );
   const spoken_langs = Array.from(
-    new Set(media.spoken_langs?.split(",").filter((tag) => /\S/.test(tag)))
+    new Set(
+      media.spoken_langs
+        ?.split(",")
+        .filter((tag) => /\S/.test(tag))
+        .filter((tag) => tag !== "_")
+    )
   );
   const subtitle_langs = Array.from(
-    new Set(media.subtitle_langs?.split(",").filter((tag) => /\S/.test(tag)))
+    new Set(
+      media.subtitle_langs
+        ?.split(",")
+        .filter((tag) => /\S/.test(tag))
+        .filter((tag) => tag !== "_")
+    )
   );
   const true_duration = calculateTrueDuration(media);
 
