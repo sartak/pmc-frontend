@@ -1,3 +1,5 @@
+import React from "react";
+import { Breadcrumbs, Typography } from "@mui/material";
 import { Tree, getTreesFromParent } from "../lib/trees";
 import { Trees } from "../components/Trees";
 
@@ -6,7 +8,14 @@ type Props = {
 };
 
 export default function Home({ trees }: Props) {
-  return <Trees trees={trees} />;
+  return (
+    <React.Fragment>
+      <Breadcrumbs>
+        <Typography color="text.primary">Top</Typography>
+      </Breadcrumbs>
+      <Trees trees={trees} />
+    </React.Fragment>
+  );
 }
 
 export async function getServerSideProps() {
