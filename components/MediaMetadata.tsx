@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Chip, Divider, Stack } from "@mui/material";
+import { Card, Chip, Divider, Stack, Typography } from "@mui/material";
 import { Duration } from "./Duration";
 import { LanguageList } from "./LanguageList";
 import { Media } from "../lib/media";
@@ -75,7 +75,9 @@ export const MediaMetadata = ({ media }: Props) => {
               ]
                 .filter(([label]) => label !== null)
                 .map(([label, lang]) => (
-                  <span key={lang}>{label}</span>
+                  <Typography variant="h5" key={lang}>
+                    {label}
+                  </Typography>
                 ))}
             </Stack>
           }
