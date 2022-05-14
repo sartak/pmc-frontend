@@ -5,6 +5,7 @@ import { Media, getMedia } from "../../lib/media";
 import { MediaMetadata } from "../../components/MediaMetadata";
 import { Tree, getAncestors, getTree } from "../../lib/trees";
 import { Viewing, getViewingsForMedia } from "../../lib/viewing";
+import { ViewingList } from "../../components/ViewingList";
 
 type Props = {
   ancestors: Array<Tree>;
@@ -27,6 +28,7 @@ export default function TreePage({ ancestors, media, viewings }: Props) {
         <Typography color="text.primary">{media.label_en}</Typography>
       </Breadcrumbs>
       <MediaMetadata media={media} />
+      <ViewingList viewings={viewings} media={media} />
     </React.Fragment>
   );
 }
