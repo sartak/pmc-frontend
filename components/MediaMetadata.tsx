@@ -110,33 +110,39 @@ export const MediaMetadata = ({ media }: Props) => {
             value={<LanguageList languages={subtitle_langs} />}
           />
         )}
-        <PropListItem
-          label="Duration"
-          value={
-            <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
-              {media.durationSeconds === null ? (
-                <span>unknown</span>
-              ) : (
-                <Duration seconds={media.durationSeconds} />
-              )}
-              {(media.skip1Start !== null || media.skip1End !== null) && (
-                <Skip start={media.skip1Start} end={media.skip1End} />
-              )}
-              {(media.skip2Start !== null || media.skip2End !== null) && (
-                <Skip start={media.skip2Start} end={media.skip2End} />
-              )}
-              {true_duration !== null &&
-                (media.skip1Start !== null ||
-                  media.skip1End !== null ||
-                  media.skip2Start !== null ||
-                  media.skip2End !== null) && (
-                  <span>
-                    → <Duration seconds={true_duration} />
-                  </span>
+        {media.type === "video" && (
+          <PropListItem
+            label="Duration"
+            value={
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{ display: "inline-block" }}
+              >
+                {media.durationSeconds === null ? (
+                  <span>unknown</span>
+                ) : (
+                  <Duration seconds={media.durationSeconds} />
                 )}
-            </Stack>
-          }
-        />
+                {(media.skip1Start !== null || media.skip1End !== null) && (
+                  <Skip start={media.skip1Start} end={media.skip1End} />
+                )}
+                {(media.skip2Start !== null || media.skip2End !== null) && (
+                  <Skip start={media.skip2Start} end={media.skip2End} />
+                )}
+                {true_duration !== null &&
+                  (media.skip1Start !== null ||
+                    media.skip1End !== null ||
+                    media.skip2Start !== null ||
+                    media.skip2End !== null) && (
+                    <span>
+                      → <Duration seconds={true_duration} />
+                    </span>
+                  )}
+              </Stack>
+            }
+          />
+        )}
       </PropList>
     </Card>
   );

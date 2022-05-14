@@ -68,7 +68,7 @@ export const ViewingList = ({ media, viewings }: Props) => {
               }
               secondary={
                 <React.Fragment>
-                  Watched{" "}
+                  {media.type === "game" ? "Played" : "Watched"}{" "}
                   <Time
                     initialSeconds={viewing.initialSeconds}
                     elapsedSeconds={viewing.elapsedSeconds}
