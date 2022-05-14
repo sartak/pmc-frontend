@@ -42,6 +42,6 @@ export async function getServerSideProps({ params }: any) {
   const ancestors = getAncestors(params.id);
   const tree = getTree(params.id);
   const subtrees = getTreesFromParent(params.id);
-  const media = getMediaFromTree(params.id);
+  const media = getMediaFromTree(tree);
   return { props: { ancestors, tree, subtrees, media } };
 }

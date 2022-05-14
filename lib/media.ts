@@ -1,3 +1,4 @@
+import { Tree } from "./trees";
 import { prepare } from "./sql";
 
 export type MediaType = string;
@@ -27,7 +28,7 @@ export type Media = {
 export const getMedia = (id: number): Media =>
   prepare("SELECT * FROM media WHERE id=?").get(id);
 
-export const getMediaFromTree = (treeId: number): Array<Media> =>
+export const getMediaFromTree = (tree: Tree): Array<Media> =>
   prepare(
     "SELECT * FROM media WHERE treeId=? ORDER BY media.sort_order IS NULL, media.sort_order ASC, media.rowid ASC"
-  ).all(treeId);
+  ).all(tree.id);
