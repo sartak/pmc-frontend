@@ -1,7 +1,7 @@
 import React from "react";
 import { Breadcrumbs, Typography } from "@mui/material";
 import { Tree, getTreesFromParent } from "../lib/trees";
-import { Trees } from "../components/Trees";
+import { TreeList } from "../components/TreeList";
 
 type Props = {
   trees: Array<Tree>;
@@ -13,7 +13,7 @@ export default function Home({ trees }: Props) {
       <Breadcrumbs>
         <Typography color="text.primary">Top</Typography>
       </Breadcrumbs>
-      <Trees trees={trees} />
+      <TreeList trees={trees} />
     </React.Fragment>
   );
 }

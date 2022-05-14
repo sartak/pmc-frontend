@@ -7,7 +7,7 @@ type Props = {
   trees: Array<Tree>;
 };
 
-export const Trees = ({ trees }: Props) => {
+export const TreeList = ({ trees }: Props) => {
   return (
     <List dense>
       {trees.map((tree) => (

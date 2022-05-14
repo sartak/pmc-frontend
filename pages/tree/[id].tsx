@@ -7,7 +7,7 @@ import {
   getTree,
   getTreesFromParent,
 } from "../../lib/trees";
-import { Trees } from "../../components/Trees";
+import { TreeList } from "../../components/TreeList";
 
 type Props = {
   tree: Tree;
@@ -29,7 +29,7 @@ export default function TreePage({ ancestors, tree, subtrees }: Props) {
         ))}
         <Typography color="text.primary">{tree.label_en}</Typography>
       </Breadcrumbs>
-      <Trees trees={subtrees} />
+      <TreeList trees={subtrees} />
     </React.Fragment>
   );
 }
