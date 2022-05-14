@@ -1,5 +1,6 @@
+import Link from "next/link";
 import React from "react";
-import { List, ListItem } from "@mui/material";
+import { List, ListItem, ListItemButton } from "@mui/material";
 import { Tree } from "../lib/trees";
 
 type Props = {
@@ -10,9 +11,13 @@ export const Trees = ({ trees }: Props) => {
   return (
     <List dense>
       {trees.map((tree) => (
-        <ListItem key={tree.id}>
-          {tree.label_en || tree.label_ja || tree.label_can}
-        </ListItem>
+        <Link key={tree.id} href={`/tree/${tree.id}`}>
+          <ListItem>
+            <ListItemButton>
+              {tree.label_en || tree.label_ja || tree.label_can}
+            </ListItemButton>
+          </ListItem>
+        </Link>
       ))}
     </List>
   );
