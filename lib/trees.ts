@@ -28,3 +28,17 @@ export const getTreesFromParent = (parentId: number): Array<Tree> =>
   prepare(
     "SELECT * FROM tree WHERE parentId=? ORDER BY sort_order IS NULL, sort_order ASC, id ASC"
   ).all(parentId);
+
+export const getAncestors = (id: number): Array<Tree> =>
+  prepare(`
+    WITH RECURSIVE parent_tree(n) AS (
+      VALUES(?)
+      UNION
+      SELECT parentId FROM tree, parent_tree
+        WHERE tree.id = parent_tree.n
+    )
+    SELECT * FROM tree
+    WHERE tree.id IN parent_tree
+    AND tree.id != ?
+    ORDER BY tree.materialized_path ASC
+  `).all(id, id);
