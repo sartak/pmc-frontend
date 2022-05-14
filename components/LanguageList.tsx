@@ -1,0 +1,20 @@
+import React from "react";
+import { Chip, Stack } from "@mui/material";
+
+type Props = {
+  languages: Array<string>;
+};
+
+export const LanguageList = ({ languages }: Props) => {
+  return (
+    <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
+      {languages.map((language) => (
+        <Chip
+          key={language}
+          label={language}
+          variant={language.startsWith("?") ? "outlined" : "filled"}
+        />
+      ))}
+    </Stack>
+  );
+};
