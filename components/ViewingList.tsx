@@ -1,6 +1,6 @@
 import React from "react";
 import { LanguageList } from "./LanguageList";
-import { List, ListItem, ListItemText } from "@mui/material";
+import { List, ListItem, ListItemText, Stack } from "@mui/material";
 import { Media } from "../lib/media";
 import { Viewing } from "../lib/viewing";
 import { formatDuration } from "./Duration";
@@ -55,11 +55,16 @@ export const ViewingList = ({ media, viewings }: Props) => {
           <ListItem key={viewing.rowid}>
             <ListItemText
               primary={
-                <React.Fragment>
-                  {viewing.startTime !== null &&
-                    new Date(viewing.startTime * 1000).toDateString()}
-                  {language && <LanguageList languages={[language]} />}
-                </React.Fragment>
+                <Stack direction="row" spacing={1}>
+                  {viewing.startTime !== null && (
+                    <span>
+                      {new Date(viewing.startTime * 1000).toDateString()}
+                    </span>
+                  )}
+                  {language && (
+                    <LanguageList languages={[language]} size="small" />
+                  )}
+                </Stack>
               }
               secondary={
                 <React.Fragment>
@@ -69,7 +74,9 @@ export const ViewingList = ({ media, viewings }: Props) => {
                     elapsedSeconds={viewing.elapsedSeconds}
                     completed={viewing.completed}
                   />{" "}
-                  {viewing.location}
+                  {viewing.location !== null && (
+                    <React.Fragment>({viewing.location})</React.Fragment>
+                  )}
                 </React.Fragment>
               }
             />

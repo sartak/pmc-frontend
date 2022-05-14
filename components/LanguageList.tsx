@@ -3,9 +3,10 @@ import { Chip, Stack } from "@mui/material";
 
 type Props = {
   languages: Array<string>;
+  size?: "small" | "medium";
 };
 
-export const LanguageList = ({ languages }: Props) => {
+export const LanguageList = ({ languages, size }: Props) => {
   return (
     <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
       {languages.map((language) => (
@@ -13,6 +14,7 @@ export const LanguageList = ({ languages }: Props) => {
           key={language}
           label={language}
           variant={language.startsWith("?") ? "outlined" : "filled"}
+          size={size}
         />
       ))}
     </Stack>
