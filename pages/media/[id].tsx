@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumbs, Typography } from "@mui/material";
+import { Breadcrumbs, Container, Typography } from "@mui/material";
 import { Link } from "../../components/Link";
 import { Media, getMedia } from "../../lib/media";
 import { MediaMetadata } from "../../components/MediaMetadata";
@@ -15,21 +15,25 @@ type Props = {
 
 export default function TreePage({ ancestors, media, viewings }: Props) {
   return (
-    <React.Fragment>
+    <Container sx={{ py: 2 }}>
       <Breadcrumbs>
         <Link href="/" color="inherit">
-          Top
+          PMC
         </Link>
         {ancestors.map((tree) => (
           <Link key={tree.id} href={`/tree/${tree.id}`} color="inherit">
-            {tree.label_en}
+            {tree.label_en || tree.label_ja || tree.label_can}
           </Link>
         ))}
-        <Typography color="text.primary">{media.label_en}</Typography>
+        <Typography color="text.primary">
+          {media.label_en || media.label_ja || media.label_can}
+        </Typography>
       </Breadcrumbs>
-      <MediaMetadata media={media} />
-      <ViewingList viewings={viewings} media={media} />
-    </React.Fragment>
+      <Container maxWidth="md" sx={{ py: 2 }}>
+        <MediaMetadata media={media} />
+        <ViewingList viewings={viewings} media={media} />
+      </Container>
+    </Container>
   );
 }
 

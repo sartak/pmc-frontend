@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumbs, Typography } from "@mui/material";
+import { Breadcrumbs, Container, Typography } from "@mui/material";
 import { Tree, getTreesFromParent } from "../lib/trees";
 import { TreeList } from "../components/TreeList";
 
@@ -9,12 +9,12 @@ type Props = {
 
 export default function Home({ trees }: Props) {
   return (
-    <React.Fragment>
+    <Container sx={{ py: 2 }}>
       <Breadcrumbs>
-        <Typography color="text.primary">Top</Typography>
+        <Typography color="text.primary">PMC</Typography>
       </Breadcrumbs>
       <TreeList trees={trees} />
-    </React.Fragment>
+    </Container>
   );
 }
 

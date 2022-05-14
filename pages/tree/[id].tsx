@@ -1,5 +1,5 @@
 import React from "react";
-import { Breadcrumbs, Typography } from "@mui/material";
+import { Breadcrumbs, Container, Typography } from "@mui/material";
 import { Link } from "../../components/Link";
 import { Media, getMediaFromTree } from "../../lib/media";
 import { MediaList } from "../../components/MediaList";
@@ -20,21 +20,23 @@ type Props = {
 
 export default function TreePage({ ancestors, tree, subtrees, media }: Props) {
   return (
-    <React.Fragment>
+    <Container sx={{ py: 2 }}>
       <Breadcrumbs>
         <Link href="/" color="inherit">
-          Top
+          PMC
         </Link>
         {ancestors.map((tree) => (
           <Link key={tree.id} href={`/tree/${tree.id}`} color="inherit">
-            {tree.label_en}
+            {tree.label_en || tree.label_ja || tree.label_can}
           </Link>
         ))}
-        <Typography color="text.primary">{tree.label_en}</Typography>
+        <Typography color="text.primary">
+          {tree.label_en || tree.label_ja || tree.label_can}
+        </Typography>
       </Breadcrumbs>
       <TreeList trees={subtrees} />
       <MediaList media={media} />
-    </React.Fragment>
+    </Container>
   );
 }
 
