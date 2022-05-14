@@ -1,5 +1,6 @@
 import React from "react";
 import { Breadcrumbs, Container, Typography } from "@mui/material";
+import { EmbeddedVideo } from "../../components/EmbeddedVideo";
 import { Link } from "../../components/Link";
 import { Media, getMedia } from "../../lib/media";
 import { MediaMetadata } from "../../components/MediaMetadata";
@@ -29,6 +30,9 @@ export default function TreePage({ ancestors, media, viewings }: Props) {
           {media.label_en || media.label_ja || media.label_can}
         </Typography>
       </Breadcrumbs>
+      <Container maxWidth="md" sx={{ my: 2 }}>
+        {media.type === "video" && <EmbeddedVideo media={media} />}
+      </Container>
       <Container maxWidth="md" sx={{ my: 2 }}>
         <MediaMetadata media={media} />
         <ViewingList viewings={viewings} media={media} />
