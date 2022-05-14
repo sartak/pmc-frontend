@@ -1,6 +1,6 @@
 import sqlite, { Statement } from "better-sqlite3";
 
-const db = new sqlite("pmc.sqlite", {
+const db = new sqlite("/db/pmc.sqlite", {
   fileMustExist: true,
 });
 
