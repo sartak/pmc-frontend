@@ -15,9 +15,9 @@ export type Viewing = {
 };
 
 export const getViewing = (id: number): Viewing =>
-  prepare("SELECT * FROM viewing WHERE id=?").get(id);
+  prepare("SELECT rowid, * FROM viewing WHERE id=?").get(id);
 
 export const getViewingsForMedia = (mediaId: number): Array<Viewing> =>
-  prepare("SELECT * FROM viewing WHERE mediaId=? ORDER BY rowid ASC").all(
-    mediaId
-  );
+  prepare(
+    "SELECT rowid, * FROM viewing WHERE mediaId=? ORDER BY rowid ASC"
+  ).all(mediaId);
