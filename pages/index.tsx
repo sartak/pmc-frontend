@@ -9,7 +9,7 @@ type Props = {
 
 export default function Home({ trees }: Props) {
   return (
-    <Container sx={{ py: 2 }}>
+    <Container sx={{ my: 2 }}>
       <Breadcrumbs>
         <Typography color="text.primary">PMC</Typography>
       </Breadcrumbs>

@@ -15,7 +15,7 @@ type Props = {
 
 export default function TreePage({ ancestors, media, viewings }: Props) {
   return (
-    <Container sx={{ py: 2 }}>
+    <Container sx={{ my: 2 }}>
       <Breadcrumbs>
         <Link href="/" color="inherit">
           PMC
@@ -29,7 +29,7 @@ export default function TreePage({ ancestors, media, viewings }: Props) {
           {media.label_en || media.label_ja || media.label_can}
         </Typography>
       </Breadcrumbs>
-      <Container maxWidth="md" sx={{ py: 2 }}>
+      <Container maxWidth="md" sx={{ my: 2 }}>
         <MediaMetadata media={media} />
         <ViewingList viewings={viewings} media={media} />
       </Container>

@@ -20,7 +20,7 @@ type Props = {
 
 export default function TreePage({ ancestors, tree, subtrees, media }: Props) {
   return (
-    <Container sx={{ py: 2 }}>
+    <Container sx={{ my: 2 }}>
       <Breadcrumbs>
         <Link href="/" color="inherit">
           PMC
