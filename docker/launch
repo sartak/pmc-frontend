@@ -1,0 +1,43 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Mana::Docker;
+
+getopt({
+  sqlite => {
+    flag    => 'db=s',
+    dir     => 1,
+    default => sub {
+      if ($ARGV{is_devel}) {
+        return '/var/sqlite/pmc-devel';
+      } else {
+        return '/var/sqlite/pmc';
+      }
+    },
+    validate => sub {
+      die "'$ARGV{sqlite}/pmc.sqlite' must be a file\n" unless -f "$ARGV{sqlite}/pmc.sqlite";
+    },
+  },
+}, {
+  image => 'pmc-frontend',
+  ports => sub {
+    if (!@{ $ARGV{ports} } && $ARGV{is_devel}) {
+      die "--port required because development mode\n";
+    }
+
+    if ($ARGV{is_devel}) {
+      return map { /^\d+$/ ? "$_:80" : $_ } @{ $ARGV{ports} };
+    } else {
+      return @{ $ARGV{ports} };
+    }
+  },
+});
+
+actions(
+  build => ['docker/Dockerfile'],
+  run => [
+    mount(
+      "$ARGV{sqlite}" => "/db/",
+    ),
+  ]
+);
