@@ -3,11 +3,23 @@ import { Box, Chip, Stack, TextField } from "@mui/material";
 
 type Props = {
   tags: Array<string>;
+  streamable?: boolean;
 };
 
-export const TagList = ({ tags }: Props) => {
+export const TagList = ({ tags, streamable }: Props) => {
   return (
-    <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
+    <Stack
+      direction="row"
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        columnGap: "4px",
+        rowGap: "4px",
+      }}
+    >
+      {streamable === true && <Chip label="streamable" />}
+      {streamable === false && <Chip label="unstreamable" color="warning" />}
       {tags.map((tag, i) => (
         <Chip key={i} label={tag} />
       ))}

@@ -1,10 +1,10 @@
 import React from "react";
-import { Chip, Stack } from "@mui/material";
 import { Duration } from "./Duration";
 import { LanguageList } from "./LanguageList";
 import { Media } from "../lib/media";
 import { PropList, PropListItem } from "./PropList";
 import { Skip } from "./Skip";
+import { Stack } from "@mui/material";
 import { TagList } from "./TagList";
 
 type Props = {
@@ -63,16 +63,7 @@ export const MediaMetadataView = ({ media }: Props) => {
         <PropListItem label="Identifier" value={media.identifier} />
       )}
       <PropListItem
-        value={
-          <React.Fragment>
-            {media.streamable ? (
-              <Chip sx={{ mr: 1 }} label="streamable" />
-            ) : (
-              <Chip sx={{ mr: 1 }} label="unstreamable" color="warning" />
-            )}
-            <TagList tags={tags} />
-          </React.Fragment>
-        }
+        value={<TagList streamable={!!media.streamable} tags={tags} />}
       />
       <PropListItem label="Path" value={media.path} />
       {spoken_langs.length > 0 && (
