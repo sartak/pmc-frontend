@@ -58,30 +58,30 @@ export const MediaMetadataEdit = ({
   return (
     <Stack spacing={2} sx={{ m: 2 }} alignItems="flex-start">
       <TextField
-        label="label_en"
+        label="English"
         value={media.label_en ?? ""}
         fullWidth
         onChange={change("label_en")}
       />
       <TextField
-        label="label_ja"
+        label="日本語"
         value={media.label_ja ?? ""}
         fullWidth
         onChange={change("label_ja")}
       />
       <TextField
-        label="label_can"
+        label="廣東話"
         value={media.label_can ?? ""}
         fullWidth
         onChange={change("label_can")}
       />
       <FormControl fullWidth>
-        <InputLabel id="media-type-label">type</InputLabel>
+        <InputLabel id="media-type-label">Type</InputLabel>
         <Select
           value={media.type}
           labelId="media-type-label"
           id="media-type-select"
-          label="type"
+          label="Type"
           disabled
         >
           {["video", "stream", "game"].map((t) => (
@@ -92,12 +92,12 @@ export const MediaMetadataEdit = ({
         </Select>
       </FormControl>
       <FormControl fullWidth>
-        <InputLabel id="media-tree-label">tree</InputLabel>
+        <InputLabel id="media-tree-label">Tree</InputLabel>
         <Select
           value="x"
           labelId="media-tree-label"
           id="media-tree-select"
-          label="tree"
+          label="Tree"
           disabled
         >
           <MenuItem value="x">
@@ -115,13 +115,13 @@ export const MediaMetadataEdit = ({
         </Select>
       </FormControl>
       <TextField
-        label="identifier"
+        label="Identifier"
         value={media.identifier ?? ""}
         fullWidth
-        onChange={change("identifier")}
+        onChange={change("Identifier")}
       />
       <TextField
-        label="path"
+        label="Path"
         required
         error={pathError}
         value={media.path ?? ""}
@@ -129,7 +129,7 @@ export const MediaMetadataEdit = ({
         onChange={change("path")}
       />
       <TextField
-        label="sort_order"
+        label="Sort order"
         value={media.sort_order ?? ""}
         fullWidth
         onChange={change("sort_order")}
@@ -147,7 +147,7 @@ export const MediaMetadataEdit = ({
         label="Streamable"
       />
       <Stack direction="row" spacing={1} display="flex" alignItems="center">
-        <span>tags</span>
+        <span>Tags</span>
         <TagListInput
           tags={tags}
           onChange={(tags) => {
@@ -157,7 +157,7 @@ export const MediaMetadataEdit = ({
         />
       </Stack>
       <Stack direction="row" spacing={1} display="flex" alignItems="center">
-        <span>spoken_langs</span>
+        <span>Spoken</span>
         <LanguageListInput
           languages={spoken_langs || []}
           onChange={(langs) => {
@@ -168,7 +168,7 @@ export const MediaMetadataEdit = ({
       </Stack>
       {!media.subtitle_langs?.length || (
         <Stack direction="row" spacing={1} display="flex" alignItems="center">
-          <span>subtitle_langs</span>
+          <span>Subtitle</span>
           <LanguageListInput
             languages={subtitle_langs || []}
             onChange={(langs) => {
@@ -182,13 +182,13 @@ export const MediaMetadataEdit = ({
         <React.Fragment>
           <Stack direction="row" spacing={1}>
             <TextField
-              label="skip 1 start"
+              label="Skip 1 start"
               value={media.skip1Start ?? ""}
               fullWidth
               onChange={change("skip1Start")}
             />
             <TextField
-              label="skip 1 end"
+              label="Skip 1 end"
               value={media.skip1End ?? ""}
               fullWidth
               onChange={change("skip1End")}
@@ -196,13 +196,13 @@ export const MediaMetadataEdit = ({
           </Stack>
           <Stack direction="row" spacing={1}>
             <TextField
-              label="skip 2 start"
+              label="Skip 2 start"
               value={media.skip2Start ?? ""}
               fullWidth
               onChange={change("skip2Start")}
             />
             <TextField
-              label="skip 2 end"
+              label="Skip 2 end"
               value={media.skip2End ?? ""}
               fullWidth
               onChange={change("skip2End")}
@@ -212,7 +212,7 @@ export const MediaMetadataEdit = ({
       )}
       <Stack direction="row" spacing={1}>
         {error ? (
-          <Tooltip arrow title={pathError ? "path is required" : ""}>
+          <Tooltip arrow title={pathError ? "Path is required" : ""}>
             {saveButton}
           </Tooltip>
         ) : (
