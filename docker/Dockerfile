@@ -1,11 +1,8 @@
 FROM node:alpine
 
-RUN apk add python3 make gcc g++ musl-dev
+RUN apk add python3 make gcc g++ musl-dev bash
 
 WORKDIR /app
 COPY . .
-RUN npm ci
-ENV NODE_ENV=production
-RUN npm run build
 
-CMD ["node_modules/.bin/next", "start"]
+CMD ["/bin/bash", "-c", "npm install; NODE_ENV=production npm run build; NODE_ENV=production node_modules/.bin/next start"]

@@ -38,6 +38,8 @@ actions(
   run => [
     mount(
       "$ARGV{sqlite}" => "/db/",
+      "./node_modules/" => "/app/node_modules/",
+      "./.next/" => "/app/.next/",
     ),
   ]
 );
