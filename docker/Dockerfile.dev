@@ -5,4 +5,4 @@ RUN apk add python3 make gcc g++ musl-dev
 WORKDIR /app
 ENV NODE_ENV=development
 
-CMD ["/bin/sh", "-c", "npm install; node_modules/.bin/next dev"]
+CMD ["/bin/sh", "-c", "chmod a+rwx /root /root/.npm; npm install; node_modules/.bin/next dev"]
