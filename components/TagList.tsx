@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Chip, Stack, TextField } from "@mui/material";
+import { Box, Chip, Stack, TextField } from "@mui/material";
 
 type Props = {
   tags: Array<string>;
@@ -26,23 +26,35 @@ export const TagListInput = ({ tags, onChange }: InputProps) => {
   return (
     <Stack
       direction="row"
-      spacing={1}
-      sx={{ display: "inline-flex", alignItems: "center", height: "25px" }}
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        columnGap: "4px",
+        rowGap: "4px",
+      }}
     >
       {tags.map((tag, i) => (
-        <Chip
-          key={i}
-          size="medium"
-          label={tag}
-          onDelete={() => onChange(tags.filter((_, j) => i !== j))}
-        />
+        <Box key={i} sx={{ height: "40px" }} display="flex" alignItems="center">
+          <Chip
+            size="medium"
+            label={tag}
+            onDelete={() => onChange(tags.filter((_, j) => i !== j))}
+          />
+        </Box>
       ))}
       {addingTag === null ? (
-        <Chip
-          variant="outlined"
-          label="add tag"
-          onClick={() => setAddingTag("")}
-        />
+        <Box
+          sx={{ height: "40px", mr: "125px" }}
+          display="flex"
+          alignItems="center"
+        >
+          <Chip
+            variant="outlined"
+            label="add tag"
+            onClick={() => setAddingTag("")}
+          />
+        </Box>
       ) : (
         <TextField
           hiddenLabel

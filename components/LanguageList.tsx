@@ -88,7 +88,16 @@ export const LanguageListInput = ({ languages, onChange }: InputProps) => {
   }
 
   return (
-    <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
+    <Stack
+      direction="row"
+      sx={{
+        display: "inline-flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        columnGap: "4px",
+        rowGap: "4px",
+      }}
+    >
       {languages.map((language, i) => (
         <Chip
           key={i}
