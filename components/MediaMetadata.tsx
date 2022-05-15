@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Chip, Divider, Stack, Typography } from "@mui/material";
+import { Card, CardHeader, Chip, Divider, Stack } from "@mui/material";
 import { Duration } from "./Duration";
 import { LanguageList } from "./LanguageList";
 import { Media } from "../lib/media";
@@ -59,29 +59,29 @@ export const MediaMetadata = ({ media }: Props) => {
 
   return (
     <Card>
+      <CardHeader
+        title={
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ display: "inline-flex" }}
+            divider={<Divider orientation="vertical" flexItem />}
+          >
+            {[
+              [media.label_en, "label_en"],
+              [media.label_ja, "label_ja"],
+              [media.label_can, "label_can"],
+            ]
+              .filter(([label]) => label !== null)
+              .map(([label, lang]) => (
+                <span key={lang}>{label}</span>
+              ))}
+          </Stack>
+        }
+      >
+        test
+      </CardHeader>
       <PropList>
-        <PropListItem
-          value={
-            <Stack
-              direction="row"
-              spacing={1}
-              sx={{ display: "inline-flex" }}
-              divider={<Divider orientation="vertical" flexItem />}
-            >
-              {[
-                [media.label_en, "label_en"],
-                [media.label_ja, "label_ja"],
-                [media.label_can, "label_can"],
-              ]
-                .filter(([label]) => label !== null)
-                .map(([label, lang]) => (
-                  <Typography variant="h5" key={lang}>
-                    {label}
-                  </Typography>
-                ))}
-            </Stack>
-          }
-        />
         {media.identifier !== null && (
           <PropListItem label="Identifier" value={media.identifier} />
         )}
