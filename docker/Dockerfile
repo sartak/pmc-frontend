@@ -1,4 +1,4 @@
-FROM node:alpine AS deps
+FROM node:alpine
 
 RUN apk add python3 make gcc g++ musl-dev
 
