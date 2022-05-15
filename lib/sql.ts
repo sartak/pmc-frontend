@@ -1,14 +1,18 @@
-import sqlite, { Statement } from "better-sqlite3";
+import sqlite, { Database, Statement } from "better-sqlite3";
 
-const db = new sqlite("/db/pmc.sqlite", {
-  fileMustExist: true,
-});
+let db: Database | null;
 
 const prepareCache = new Map<string, Statement<any[]>>();
 export const prepare = (query: string): Statement<any[]> => {
   const cached = prepareCache.get(query);
   if (cached) {
     return cached;
+  }
+
+  if (!db) {
+    db = new sqlite("/db/pmc.sqlite", {
+      fileMustExist: true,
+    });
   }
 
   const created = db.prepare(query);
