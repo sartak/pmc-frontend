@@ -34,7 +34,7 @@ export default function TreePage({ ancestors, media, viewings }: Props) {
         {media.type === "video" && <EmbeddedVideo media={media} />}
       </Container>
       <Container maxWidth="md" sx={{ my: 2 }}>
-        <MediaMetadata media={media} />
+        <MediaMetadata media={media} ancestors={ancestors} />
         <ViewingList viewings={viewings} media={media} />
       </Container>
     </Container>
