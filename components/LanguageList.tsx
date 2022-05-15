@@ -9,9 +9,9 @@ type Props = {
 export const LanguageList = ({ languages, size }: Props) => {
   return (
     <Stack direction="row" spacing={1} sx={{ display: "inline-block" }}>
-      {languages.map((language) => (
+      {languages.map((language, i) => (
         <Chip
-          key={language}
+          key={i}
           label={language}
           variant={language.startsWith("?") ? "outlined" : "filled"}
           size={size}
