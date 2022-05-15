@@ -1,0 +1,37 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Mana::Docker;
+
+getopt({
+  sqlite => {
+    flag    => 'db=s',
+    dir     => 1,
+    default => '/var/sqlite/pmc-devel',
+    validate => sub {
+      die "'$ARGV{sqlite}/pmc.sqlite' must be a file\n" unless -f "$ARGV{sqlite}/pmc.sqlite";
+    },
+  },
+  install => {
+    flag    => 'install!',
+    default => 0,
+  },
+}, {
+  image => sub { $ARGV{image} || 'pmc-frontend-dev' },
+});
+
+actions(
+  build => ['docker/Dockerfile.dev'],
+  run => [
+    '-it',
+    mount(
+      "$ARGV{sqlite}" => "/db/",
+      './' => '/app',
+    ),
+    env(
+      LIVE_DEVEL => 1,
+      DANGEROUSLY_DISABLE_HOST_CHECK => 'true',
+      RUN_NPM_INSTALL => $ARGV{install},
+    ),
+  ],
+);

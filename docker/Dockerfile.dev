@@ -1,0 +1,8 @@
+FROM node:alpine
+
+RUN apk add python3 make gcc g++ musl-dev
+
+WORKDIR /app
+ENV NODE_ENV=development
+
+CMD ["/bin/sh", "-c", "npm install; node_modules/.bin/next dev"]
