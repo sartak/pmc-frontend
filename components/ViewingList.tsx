@@ -2,6 +2,7 @@ import React from "react";
 import { LanguageList } from "./LanguageList";
 import { List, ListItem, ListItemText, Stack } from "@mui/material";
 import { Media } from "../lib/media";
+import { Time } from "./Time";
 import { Viewing } from "../lib/viewing";
 import { formatDuration } from "./Duration";
 
@@ -10,7 +11,7 @@ type Props = {
   viewings: Array<Viewing>;
 };
 
-const Time = ({
+const ViewingDuration = ({
   initialSeconds,
   elapsedSeconds,
   completed,
@@ -57,9 +58,7 @@ export const ViewingList = ({ media, viewings }: Props) => {
               primary={
                 <Stack direction="row" spacing={1}>
                   {viewing.startTime !== null && (
-                    <span>
-                      {new Date(viewing.startTime * 1000).toDateString()}
-                    </span>
+                    <Time date={new Date(viewing.startTime * 1000)} />
                   )}
                   {language && (
                     <LanguageList languages={[language]} size="small" />
@@ -69,7 +68,7 @@ export const ViewingList = ({ media, viewings }: Props) => {
               secondary={
                 <React.Fragment>
                   {media.type === "game" ? "Played" : "Watched"}{" "}
-                  <Time
+                  <ViewingDuration
                     initialSeconds={viewing.initialSeconds}
                     elapsedSeconds={viewing.elapsedSeconds}
                     completed={viewing.completed}
