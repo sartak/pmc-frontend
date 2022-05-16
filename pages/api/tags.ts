@@ -7,6 +7,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       tags: Array.from(getDistinctTags()).sort(),
     });
   } else {
-    res.status(405);
+    return res.status(405).end();
   }
 }
