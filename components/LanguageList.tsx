@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import useSWR from "swr";
 import {
   Chip,
   Menu,
@@ -6,6 +7,7 @@ import {
   MenuList,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
 
 type Props = {
@@ -44,39 +46,23 @@ type InputProps = {
   onChange: (languages: Array<string>) => void;
 };
 
-const AllLanguages = [
-  "en",
-  "en/c",
-  "en/vi",
+export const LanguageListInput = ({
+  languages,
+  type,
+  onChange,
+}: InputProps) => {
+  const { data, error } = useSWR(
+    type === "spoken_langs" ? "/api/spoken_langs" : "/api/subtitle_langs"
+  );
 
-  "ja",
-  "ja/c",
+  let allLangs: Array<string> = data
+    ? data.langs.filter(
+        (lang: string) => !lang.startsWith("?/") && !lang.startsWith("??")
+      )
+    : [];
 
-  "can",
-  "can/c",
+  allLangs = Array.from(new Set(["en", "ja", "can", ...allLangs]));
 
-  "jp&can",
-
-  "ost",
-  "?",
-  "_",
-
-  "de",
-  "es",
-  "es/c",
-  "fr",
-  "fr/vi",
-  "it",
-  "ko",
-  "man",
-  "pt",
-  "ru",
-  "sv",
-  "th",
-  "yua",
-];
-
-export const LanguageListInput = ({ languages, onChange }: InputProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState<null | number>(null);
   const open = Boolean(anchorEl);
@@ -126,19 +112,30 @@ export const LanguageListInput = ({ languages, onChange }: InputProps) => {
         PaperProps={{ style: { maxHeight: "200px" } }}
       >
         <MenuList dense>
-          {AllLanguages.map((lang) => (
-            <MenuItem
-              key={lang}
-              onClick={() => {
-                onChange(
-                  languages.map((l, j) => (activeIndex === j ? lang : l))
-                );
-                handleClose();
-              }}
-            >
-              {lang}
+          {data &&
+            allLangs.map((lang) => (
+              <MenuItem
+                key={lang}
+                onClick={() => {
+                  onChange(
+                    languages.map((l, j) => (activeIndex === j ? lang : l))
+                  );
+                  handleClose();
+                }}
+              >
+                {lang}
+              </MenuItem>
+            ))}
+          {!data && error && (
+            <MenuItem>
+              <Typography color="error.main">{error.toString()}</Typography>
             </MenuItem>
-          ))}
+          )}
+          {!data && !error && (
+            <MenuItem>
+              <Typography fontWeight="light">Loading…</Typography>
+            </MenuItem>
+          )}
         </MenuList>
       </Menu>
     </Stack>
