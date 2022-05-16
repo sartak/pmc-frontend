@@ -123,3 +123,21 @@ export const getMediaFromTree = (tree: Tree): Array<Media> => {
     ).all(id);
   }
 };
+
+export const getDistinctTags = (): Set<string> => {
+  const allTags = new Set<string>();
+  prepare(
+    "SELECT DISTINCT tags FROM media WHERE tags IS NOT NULL AND tags != ''"
+  )
+    .raw()
+    .all()
+    .forEach(([tags]) => {
+      tags
+        .split("`")
+        .filter(Boolean)
+        .forEach((tag: string) => {
+          allTags.add(tag);
+        });
+    });
+  return allTags;
+};
