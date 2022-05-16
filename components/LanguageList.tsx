@@ -10,6 +10,7 @@ import {
 
 type Props = {
   languages: Array<string>;
+  type: "spoken_langs" | "subtitle_langs";
   size?: "small" | "medium";
 };
 
@@ -39,6 +40,7 @@ export const LanguageList = ({ languages, size }: Props) => {
 
 type InputProps = {
   languages: Array<string>;
+  type: "spoken_langs" | "subtitle_langs";
   onChange: (languages: Array<string>) => void;
 };
 
