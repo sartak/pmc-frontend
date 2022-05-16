@@ -141,3 +141,39 @@ export const getDistinctTags = (): Set<string> => {
     });
   return allTags;
 };
+
+export const getDistinctSpokenLangs = (): Set<string> => {
+  const allLangs = new Set<string>();
+  prepare(
+    "SELECT DISTINCT spoken_langs FROM media WHERE spoken_langs IS NOT NULL AND spoken_langs != ''"
+  )
+    .raw()
+    .all()
+    .forEach(([tags]) => {
+      tags
+        .split(",")
+        .filter(Boolean)
+        .forEach((lang: string) => {
+          allLangs.add(lang);
+        });
+    });
+  return allLangs;
+};
+
+export const getDistinctSubtitleLangs = (): Set<string> => {
+  const allLangs = new Set<string>();
+  prepare(
+    "SELECT DISTINCT subtitle_langs FROM media WHERE subtitle_langs IS NOT NULL AND subtitle_langs != ''"
+  )
+    .raw()
+    .all()
+    .forEach(([tags]) => {
+      tags
+        .split(",")
+        .filter(Boolean)
+        .forEach((lang: string) => {
+          allLangs.add(lang);
+        });
+    });
+  return allLangs;
+};
