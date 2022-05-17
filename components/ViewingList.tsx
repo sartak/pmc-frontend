@@ -61,7 +61,11 @@ export const ViewingList = ({ media, viewings }: Props) => {
                     <Time date={new Date(viewing.startTime * 1000)} />
                   )}
                   {language && (
-                    <LanguageList languages={[language]} size="small" />
+                    <LanguageList
+                      kind="spoken_langs"
+                      languages={[language]}
+                      size="small"
+                    />
                   )}
                 </Stack>
               }
