@@ -11,7 +11,7 @@ type Props = {
 export const Link = (props: Props) => {
   return (
     <NextLink href={props.href}>
-      <MUILink href="#" color={props.color} underline="hover">
+      <MUILink href={props.href} color={props.color} underline="hover">
         {props.children}
       </MUILink>
     </NextLink>
