@@ -6,7 +6,14 @@ type Props = {
 
 export const formatDuration = (seconds: number): string => {
   let s: string | number = seconds;
-  let m: string | number = Math.floor(seconds / 60);
+  let sign = "";
+
+  if (s < 0) {
+    s = Math.abs(s);
+    sign = "-";
+  }
+
+  let m: string | number = Math.floor(s / 60);
   s -= m * 60;
   let h: string | number = Math.floor(m / 60);
   m -= h * 60;
@@ -19,9 +26,9 @@ export const formatDuration = (seconds: number): string => {
     if (m < 10) {
       m = "0" + m;
     }
-    return [h, m, s].join(":");
+    return sign + [h, m, s].join(":");
   } else {
-    return [m, s].join(":");
+    return sign + [m, s].join(":");
   }
 };
 
