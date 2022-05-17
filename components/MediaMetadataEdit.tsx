@@ -159,7 +159,7 @@ export const MediaMetadataEdit = ({
       <Stack direction="row" spacing={1} display="flex" alignItems="center">
         <span>Spoken</span>
         <LanguageListInput
-          type="spoken_langs"
+          kind="spoken_langs"
           languages={spoken_langs || []}
           onChange={(langs) => {
             setChanged(true);
@@ -171,7 +171,7 @@ export const MediaMetadataEdit = ({
         <Stack direction="row" spacing={1} display="flex" alignItems="center">
           <span>Subtitle</span>
           <LanguageListInput
-            type="subtitle_langs"
+            kind="subtitle_langs"
             languages={subtitle_langs || []}
             onChange={(langs) => {
               setChanged(true);

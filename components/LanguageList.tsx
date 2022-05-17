@@ -12,7 +12,7 @@ import {
 
 type Props = {
   languages: Array<string>;
-  type: "spoken_langs" | "subtitle_langs";
+  kind: "spoken_langs" | "subtitle_langs";
   size?: "small" | "medium";
 };
 
@@ -42,17 +42,17 @@ export const LanguageList = ({ languages, size }: Props) => {
 
 type InputProps = {
   languages: Array<string>;
-  type: "spoken_langs" | "subtitle_langs";
+  kind: "spoken_langs" | "subtitle_langs";
   onChange: (languages: Array<string>) => void;
 };
 
 export const LanguageListInput = ({
   languages,
-  type,
+  kind,
   onChange,
 }: InputProps) => {
   const { data, error } = useSWR(
-    type === "spoken_langs" ? "/api/spoken_langs" : "/api/subtitle_langs"
+    kind === "spoken_langs" ? "/api/spoken_langs" : "/api/subtitle_langs"
   );
 
   let allLangs: Array<string> = data

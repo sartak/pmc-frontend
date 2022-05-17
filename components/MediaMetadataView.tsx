@@ -69,14 +69,14 @@ export const MediaMetadataView = ({ media }: Props) => {
       {spoken_langs.length > 0 && (
         <PropListItem
           label="Spoken langs"
-          value={<LanguageList type="spoken_langs" languages={spoken_langs} />}
+          value={<LanguageList kind="spoken_langs" languages={spoken_langs} />}
         />
       )}
       {subtitle_langs.length > 0 && (
         <PropListItem
           label="Subtitle langs"
           value={
-            <LanguageList type="subtitle_langs" languages={subtitle_langs} />
+            <LanguageList kind="subtitle_langs" languages={subtitle_langs} />
           }
         />
       )}
