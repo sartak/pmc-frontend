@@ -10,7 +10,7 @@ export const prepare = (query: string): Statement<any[]> => {
   }
 
   if (!db) {
-    db = new sqlite("/db/pmc.sqlite", {
+    db = new sqlite("pmc.sqlite", {
       fileMustExist: true,
     });
   }
